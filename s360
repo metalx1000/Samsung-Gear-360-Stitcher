@@ -1,0 +1,30 @@
+#!/bin/bash
+
+dir="/tmp/s360"
+pto="/tmp/s360.pto"
+url=""
+
+#remove directory if it exists
+if [ -d "$dir" ]
+then
+  echo "Working Directory Exists..."
+  echo "Removing Directory..."
+  rm -fr "$dir"
+fi
+
+#checking for hugin file
+if [ !f "$pto" ]
+then
+  echo "Downloading PTO file..."
+  wget "$url" -O "$pto"
+fi
+
+#create Directory
+echo "Creating Directory..."
+mkdir -p "$dir" && echo "$dir created"
+
+cp "$1" "$dir"
+cd "$dir"
+#split image using imagemagick
+convert "$1" -crop 50%x100% +repage /tmp/fe.png
+hugin_executor --stitching --prefix=pano_$1 hugin.pto
