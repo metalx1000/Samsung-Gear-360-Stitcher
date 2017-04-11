@@ -1,9 +1,43 @@
 #!/bin/bash
+# 
+# This file is part of the s360 distribution (https://github.com/metalx1000/Samsung-Gear-360-Stitcher).
+# Copyright (c) 2017 Kris Occhipinti.
+# https://FilmsByKris.com
+# 
+# This program is free software: you can redistribute it and/or modify  
+# it under the terms of the GNU Affero General Public License as published by  
+# the Free Software Foundation, version 3.
+#
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
+# General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License 
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+cat << EOT
+  s360 created by Kris Occhipint 
+  https://FilmsByKris.com
+  https://github.com/metalx1000/Samsung-Gear-360-Stitcher
+  GNU Affero General Public License
+
+
+EOT
 
 hdir="$PWD"
 dir="/tmp/s360"
 pto="/tmp/s360.pto"
 url="https://raw.githubusercontent.com/metalx1000/Samsung-Gear-360-Stitcher/master/ptos/hugin.pto"
+
+if [ $# -lt 1 ]
+then
+  echo 'No input file given!!!'
+  echo 'example: $0 image.jpg'
+  echo 'Goodbye...'
+  exit 1
+fi
 
 #remove directory if it exists
 if [ -d "$dir" ]
