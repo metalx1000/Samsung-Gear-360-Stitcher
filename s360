@@ -13,25 +13,27 @@ then
   rm -fr "$dir"
 fi
 
+#create Directory
+echo "Creating Directory..."
+mkdir -p "$dir" && echo "$dir created"
+
 #checking for hugin file
-if [ !f "$pto" ]
+if [ ! -f "$pto" ]
 then
   echo "Downloading PTO file..."
   wget "$url" -O "$pto"
 fi
 
 #place pto in project folder
-cp "$pto" "$dir"
+cp "$pto" "$dir/"
 
-#create Directory
-echo "Creating Directory..."
-mkdir -p "$dir" && echo "$dir created"
-
-cp "$1" "$dir"
+cp "$1" "$dir/"
 #split image using imagemagick
 convert "$1" -crop 50%x100% +repage /tmp/fe.png
 
 #move to working dir
 cd "$dir"
-hugin_executor --stitching --prefix=pano_$1 hugin.pto
-cp "*.png" "$hdir"
+hugin_executor --stitching --prefix=pano_$1 "$pto"
+cp $dir/*.png "$hdir"
+
+xdg-open $dir/*.png
