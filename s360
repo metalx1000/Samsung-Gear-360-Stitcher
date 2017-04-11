@@ -59,11 +59,13 @@ then
 fi
 
 #place pto in project folder
-cp "$pto" "$dir/"
+echo "Setting up files..."
+cp -v "$pto" "$dir/"
 
-cp "$1" "$dir/"
+cp -v "$1" "$dir/"
 #split image using imagemagick
-convert "$1" -crop 50%x100% +repage /tmp/fe.png
+echo "Cropping Image..."
+convert "$1" -crop 50%x100% +repage $dir/fe.png
 
 #move to working dir
 cd "$dir"
