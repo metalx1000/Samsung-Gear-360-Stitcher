@@ -1,8 +1,9 @@
 #!/bin/bash
 
+hdir="$PWD"
 dir="/tmp/s360"
 pto="/tmp/s360.pto"
-url=""
+url="https://raw.githubusercontent.com/metalx1000/Samsung-Gear-360-Stitcher/master/ptos/hugin.pto"
 
 #remove directory if it exists
 if [ -d "$dir" ]
@@ -19,12 +20,18 @@ then
   wget "$url" -O "$pto"
 fi
 
+#place pto in project folder
+cp "$pto" "$dir"
+
 #create Directory
 echo "Creating Directory..."
 mkdir -p "$dir" && echo "$dir created"
 
 cp "$1" "$dir"
-cd "$dir"
 #split image using imagemagick
 convert "$1" -crop 50%x100% +repage /tmp/fe.png
+
+#move to working dir
+cd "$dir"
 hugin_executor --stitching --prefix=pano_$1 hugin.pto
+cp "*.png" "$hdir"
