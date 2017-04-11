@@ -70,6 +70,6 @@ convert "$1" -crop 50%x100% +repage $dir/fe.png
 #move to working dir
 cd "$dir"
 hugin_executor --stitching --prefix=pano_$1 "$pto"
-cp $dir/*.png "$hdir"
+cp $dir/pano_$1 "$hdir"
 
-xdg-open $dir/*.png
+xdg-open $dir/pano_$1
