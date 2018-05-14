@@ -67,9 +67,11 @@ cp -v "$1" "$dir/"
 echo "Cropping Image..."
 convert "$1" -crop 50%x100% +repage $dir/fe.png
 
+#output file name
+output="$(echo "$dir/pano_$1"|tr [A-Z] [a-z])"
 #move to working dir
 cd "$dir"
 hugin_executor --stitching --prefix=pano_$1 "$pto"
-cp $dir/pano_$1 "$hdir"
+cp "$output" "$hdir"
 
-xdg-open $dir/pano_$1
+xdg-open "$output"
